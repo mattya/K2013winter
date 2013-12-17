@@ -1,5 +1,10 @@
 
 class State{
+  // 0: title
+  // 1: game
+  // 2: gameover
+  int meta_state;
+  
   float px, py;
   float php;
   
@@ -20,6 +25,8 @@ class State{
   }
   
   void init(){
+    meta_state = 0;
+    
     px = width/2;
     py = height/2;
     // プレイヤー初期HP
@@ -31,7 +38,13 @@ class State{
   }
   
   void update(KeyState ks){
-    if(php>0){
+    if(meta_state==0){
+      if(ks.z==1){
+        init();
+        meta_state=1;
+      }
+    }
+    else if(meta_state==1){
       // 弾を進行させる
       for(int i=0; i<e_num; i++){
         ex[i] += evx[i];
@@ -44,6 +57,7 @@ class State{
           php--;
         }
       }
+      if(php<=0) meta_state = 2;
       
       // プレイヤーの移動
       if(ks.u==1) py-=3;
@@ -72,23 +86,9 @@ class State{
       }
       time += 1.0;
     }
-  }
-  
-  void keyPressed(int k, int kc){
-    if(k=='r'){
-      if(php<=0){
-        init();
-      }
-    }
-    else if(k==CODED){
-      if(kc==UP){
-        py -= 3;
-      }else if(kc==DOWN){
-        py += 3;
-      }else if(kc==RIGHT){
-        px += 3;
-      }else if(kc==LEFT){
-        px -= 3;
+    else if(meta_state==2){
+      if(ks.reset==1){
+        meta_state = 0;
       }
     }
   }

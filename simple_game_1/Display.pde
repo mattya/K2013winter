@@ -2,13 +2,12 @@
 class Display{
   
   void draw(State state){
-    if(state.php<=0){
-      background(0);
-      fill(255);
+    if(state.meta_state==0){
+      background(255);
+      fill(0);
       textAlign(CENTER);
-      text("game over", width/2, height/2);
-      text("your score: "+state.time, width/2, height/2+20);
-    }else{
+      text("press any key to start", width/2, height/2);
+    }else if(state.meta_state==1){
       background(255);
       
       // 弾
@@ -29,6 +28,12 @@ class Display{
       stroke(0);
       noFill();
       rect(10, 10, width-20, 10);
+    }else if(state.meta_state==2){      
+      background(0);
+      fill(255);
+      textAlign(CENTER);
+      text("game over", width/2, height/2);
+      text("your score: "+state.time, width/2, height/2+20);
     }
   }
 }
