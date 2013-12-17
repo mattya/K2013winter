@@ -47,4 +47,18 @@ class State{
     e_num++;
     
   }
+  
+  void keyPressed(int k, int kc){
+    if(k==CODED){
+      if(kc==UP){
+        py -= 3;
+      }else if(kc==DOWN){
+        py += 3;
+      }else if(kc==RIGHT){
+        px += 3;
+      }else if(kc==LEFT){
+        px -= 3;
+      }
+    }
+  }
 }
