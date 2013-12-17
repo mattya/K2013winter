@@ -11,16 +11,21 @@ class State{
   float time;
   
   State(){
+    ex = new float[e_num_max];
+    ey = new float[e_num_max];
+    evx = new float[e_num_max];
+    evy = new float[e_num_max];
+    
+    init();
+  }
+  
+  void init(){
     px = width/2;
     py = height/2;
     // プレイヤー初期HP
     php = 100;
     
     e_num = 0;
-    ex = new float[e_num_max];
-    ey = new float[e_num_max];
-    evx = new float[e_num_max];
-    evy = new float[e_num_max];
     
     time = 0;
   }
@@ -59,11 +64,17 @@ class State{
           e_num--;
         }
       }
+      time += 1.0;
     }
   }
   
   void keyPressed(int k, int kc){
-    if(k==CODED){
+    if(k=='r'){
+      if(php<=0){
+        init();
+      }
+    }
+    else if(k==CODED){
       if(kc==UP){
         py -= 3;
       }else if(kc==DOWN){
