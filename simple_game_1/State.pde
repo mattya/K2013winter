@@ -1,5 +1,7 @@
 
 class State{
+  int title;
+  
   float px, py;
   float php;
   
@@ -11,6 +13,8 @@ class State{
   float time;
   
   State(){
+    title = 1;
+    
     px = width/2;
     py = height/2;
     // プレイヤー初期HP
@@ -26,7 +30,7 @@ class State{
   }
   
   void update(){
-    if(php>0){
+    if(php>0 && title==0){
       // 弾を進行させる
       for(int i=0; i<e_num; i++){
         ex[i] += evx[i];
@@ -63,6 +67,9 @@ class State{
   }
   
   void keyPressed(int k, int kc){
+    if(title==1){
+      title = 0;
+    }
     if(k==CODED){
       if(kc==UP){
         py -= 3;
