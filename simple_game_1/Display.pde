@@ -6,7 +6,7 @@ class Display{
       background(255);
       fill(0);
       textAlign(CENTER);
-      text("press any key to start", width/2, height/2);
+      text("press z key to start", width/2, height/2);
     }else if(state.meta_state==1){
       background(255);
       
