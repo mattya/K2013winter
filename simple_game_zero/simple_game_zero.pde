@@ -13,3 +13,7 @@ void draw(){
   state.update();
   display.draw(state);
 }
+
+void keyPressed(){
+  state.keyPressed(key, keyCode);
+}
