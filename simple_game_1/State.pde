@@ -27,8 +27,10 @@ class State{
       }
       
       // 1秒ごとに弾を増やす
-      ex[e_num] = random(0, width);
-      ey[e_num] = random(0, height);
+      do{
+        ex[e_num] = random(0, width);
+        ey[e_num] = random(0, height);
+      }while(dist(ex[e_num], ey[e_num], px, py) < 30);
       evx[e_num] = random(-2, 2);
       evy[e_num] = random(-2, 2);
       e_num++;
