@@ -25,7 +25,7 @@ class State{
     time = 0;
   }
   
-  void update(){
+  void update(KeyState ks){
     if(php>0){
       // 弾を進行させる
       for(int i=0; i<e_num; i++){
@@ -39,6 +39,12 @@ class State{
           php--;
         }
       }
+      
+      // プレイヤーの移動
+      if(ks.u==1) py-=3;
+      if(ks.d==1) py+=3;
+      if(ks.l==1) px-=3;
+      if(ks.r==1) px+=3;
       
       // 1秒ごとに弾を増やす
       do{
