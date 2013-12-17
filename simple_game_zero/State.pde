@@ -46,6 +46,17 @@ class State{
       evx[e_num] = random(-2, 2);
       evy[e_num] = random(-2, 2);
       e_num++;
+      
+      // 場外に出た弾を消す
+      for(int i=e_num-1; i>=0; i--){
+        if(ex[i]<0 || ex[i]>width || ey[i]<0 || ey[i]>height){
+          ex[i] = ex[e_num-1];
+          ey[i] = ey[e_num-1];
+          evx[i] = evx[e_num-1];
+          evy[i] = evy[e_num-1];
+          e_num--;
+        }
+      }
     }
   }
   
