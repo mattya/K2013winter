@@ -3,19 +3,36 @@
 
 
 class State_field{
+  // 現在のマップ
+  Data_field field;
+  
   // プレイヤーのマップ上の位置
   int px, py;
   
+  
   State_field(){
-    px = width/2;
-    py = height/2;
+  }
+  
+  // マップfからスタート
+  void init(Data_field f){
+    field = f;
+    px = field.start_x;
+    py = field.start_y;
   }
   
   void update(Game game){
-    if(game.event.key_up>=1) py-=1;
-    if(game.event.key_down>=1) py+=1;
-    if(game.event.key_right>=1) px+=1;
-    if(game.event.key_left>=1) px-=1;
+    if(game.event.key_up==1){
+      if(field.can_enter(px, py-1) == 1) py-=1;
+    }
+    if(game.event.key_down==1){
+      if(field.can_enter(px, py+1) == 1) py+=1;
+    }
+    if(game.event.key_right==1){
+      if(field.can_enter(px+1, py) == 1) px+=1;
+    }
+    if(game.event.key_left==1){
+      if(field.can_enter(px-1, py) == 1) px-=1;
+    }
     if(game.event.key_z==1){
       game.state.meta_state = 1;
       game.state.s_battle.init(game, 0);

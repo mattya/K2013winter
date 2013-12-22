@@ -16,6 +16,10 @@ class State{
     s_field = new State_field();
   }
   
+  void init(Game game){
+    s_field.init(game.data.field);
+  }
+  
   void update(Game game){
     
     // 現在マップに居るか戦闘中かで場合分け

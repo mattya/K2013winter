@@ -3,15 +3,42 @@
 
 class Data{
   Data_enemy[] data_enemy;
-
+  Data_field field;
   
   Data(){
-    
   }
   
   void load_all(){
-    
+    field = new Data_field();
   }
+}
+
+class Data_field{
+  PImage img;
+  PImage mask;
+  int start_x, start_y;
+  
+  Data_field(){
+    img = loadImage("./images/field_0.png");
+    mask = loadImage("./images/mask_0.png");
+    start_x = 600;
+    start_y = 400;
+//    img.loadPixels();
+    mask.loadPixels();
+  }
+  
+  int can_enter(int x, int y){
+    if(x>=0&&x<img.width&&y>=0&&y<img.height){
+      if(mask.pixels[y*mask.width+x]==color(255)){
+        return 1;
+      }
+    }
+    return 0;
+  }
+}
+
+class Data_NPC{
+  
 }
 
 class Data_enemy{
