@@ -2,6 +2,7 @@
 Display display;
 State state;
 KeyState ks;
+Data data;
 
 
 void setup(){
@@ -9,6 +10,8 @@ void setup(){
   display = new Display();
   state = new State();
   ks = new KeyState();
+  data = new Data();
+  data.load_bullet_data();
 }
 
 void draw(){
