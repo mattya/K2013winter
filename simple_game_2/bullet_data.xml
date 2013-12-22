@@ -1,0 +1,29 @@
+<bullet_data>
+	<bullet>
+		<name>normal</name>
+		<radius>3</radius>
+		<attack>1</attack>
+		<hp>1</hp>
+		<speed>5</speed>
+		<vspeed>0</vspeed>
+		<angle>0</angle>
+		<vangle>180</vangle>
+		<pattern>
+		</pattern>
+	</bullet>
+	<bullet>
+		<name>missile</name>
+		<radius>3</radius>
+		<attack>2</attack>
+		<hp>3</hp>
+		<speed>3</speed>
+		<vspeed>0</vspeed>
+		<angle>0</angle>
+		<vangle>30</vangle>
+		<pattern>
+			<timing start="1" end="2" action="angle" type="player" strength="0.1"></timing>
+			<timing start="2" end="3" action="speed" strength="0.1"></timing>
+			<conditional trigger="near" action="bomb" radius="20" attack="10"></conditional>
+		</pattern>
+	</bullet>
+</bullet_data>
