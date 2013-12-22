@@ -18,6 +18,8 @@ class Data_field{
   PImage mask;
   int start_x, start_y;
   
+  int npc_start_x, npc_start_y;
+  
   Data_field(){
     img = loadImage("./images/field_0.png");
     mask = loadImage("./images/mask_0.png");
@@ -25,6 +27,10 @@ class Data_field{
     start_y = 400;
 //    img.loadPixels();
     mask.loadPixels();
+    
+    npc_start_x = 600;
+    npc_start_y = 300;
+    
   }
   
   int can_enter(int x, int y){
@@ -37,9 +43,6 @@ class Data_field{
   }
 }
 
-class Data_NPC{
-  
-}
 
 class Data_enemy{
   String name;
