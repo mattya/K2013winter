@@ -23,3 +23,12 @@ class State{
     else if(meta_state==1) s_battle.update(game);
   }
 }
+
+class State_player{
+  int hp, maxhp;
+  int att;
+  int def;
+  int spd;
+  
+}
+

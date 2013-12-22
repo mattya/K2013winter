@@ -12,10 +12,13 @@ class State_field{
   }
   
   void update(Game game){
-    if(game.event.key_up==1) py-=1;
-    if(game.event.key_down==1) py+=1;
-    if(game.event.key_right==1) px+=1;
-    if(game.event.key_left==1) px-=1;
-    if(game.event.key_z==1) game.state.meta_state = 1;
+    if(game.event.key_up>=1) py-=1;
+    if(game.event.key_down>=1) py+=1;
+    if(game.event.key_right>=1) px+=1;
+    if(game.event.key_left>=1) px-=1;
+    if(game.event.key_z==1){
+      game.state.meta_state = 1;
+      game.state.s_battle.init(game, 0);
+    }
   }
 }

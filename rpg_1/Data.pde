@@ -2,6 +2,9 @@
 // 画像、音声、マップ、敵一覧、道具一覧、さらにセーブデータなどを扱う
 
 class Data{
+  Data_enemy[] data_enemy;
+
+  
   Data(){
     
   }
@@ -10,3 +13,13 @@ class Data{
     
   }
 }
+
+class Data_enemy{
+  String name;
+  PImage img;
+  int maxhp;
+  int att;
+  int def;
+  int spd;
+}
+
