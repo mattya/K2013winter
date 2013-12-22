@@ -42,9 +42,11 @@ class State{
     }
     else if(meta_state==1){
       // 弾を進行させる
+      int tmp_e_num = e_num;
       for(int i=0; i<e_num; i++){
-        bs[i].move();
+        tmp_e_num = bs[i].move(bs, tmp_e_num, e_num_max, px, py);
       }
+      e_num = tmp_e_num;
       
       // プレイヤーとの当たり判定
       for(int i=0; i<e_num; i++){
@@ -60,15 +62,15 @@ class State{
       if(ks.l==1) px-=3;
       if(ks.r==1) px+=3;
       
-      // 1/5の確率で弾を増やす
+      // 1/50の確率で敵を発生
       float tx, ty;
-      if(random(0, 1)<0.2){
+      if(random(0, 1)<0.02){
         do{
           tx = random(0, width);
           ty = random(0, height);
         }while(dist(tx, ty, px, py) < 30 || dist(tx, ty, width/2, height/2)<width/2);
         bs[e_num] = new Bullet();
-        bs[e_num].init((int)random(0, 2), tx, ty, px, py);
+        bs[e_num].init(20+(int)random(0, 2), tx, ty, px, py);
         e_num++;
       }
       

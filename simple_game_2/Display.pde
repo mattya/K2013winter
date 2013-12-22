@@ -15,6 +15,8 @@ class Display{
         stroke(0);
         if(state.bs[i].type==0) fill(255, 0, 0, 100);
         if(state.bs[i].type==1) fill(0, 255, 0, 100);
+        if(state.bs[i].type==20) fill(255, 0, 0, 200);
+        if(state.bs[i].type==21) fill(0, 255, 0, 200);
         ellipse(state.bs[i].x, state.bs[i].y, state.bs[i].r*2, state.bs[i].r*2);
       }
       
