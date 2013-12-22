@@ -10,16 +10,12 @@ class State{
   
   int e_num;
   int e_num_max = 1000;
-  float[] ex, ey;
-  float[] evx, evy;
+  Bullet[] bs;
   
   float time;
   
   State(){
-    ex = new float[e_num_max];
-    ey = new float[e_num_max];
-    evx = new float[e_num_max];
-    evy = new float[e_num_max];
+    bs = new Bullet[e_num_max];
     
     init();
   }
@@ -47,13 +43,12 @@ class State{
     else if(meta_state==1){
       // 弾を進行させる
       for(int i=0; i<e_num; i++){
-        ex[i] += evx[i];
-        ey[i] += evy[i];
+        bs[i].move();
       }
       
       // プレイヤーとの当たり判定
       for(int i=0; i<e_num; i++){
-        if(dist(px, py, ex[i], ey[i]) < 5){
+        if(dist(px, py, bs[i].x, bs[i].y) < 2+bs[i].r){
           php--;
         }
       }
@@ -65,22 +60,22 @@ class State{
       if(ks.l==1) px-=3;
       if(ks.r==1) px+=3;
       
-      // 1秒ごとに弾を増やす
-      do{
-        ex[e_num] = random(0, width);
-        ey[e_num] = random(0, height);
-      }while(dist(ex[e_num], ey[e_num], px, py) < 30);
-      evx[e_num] = random(-2, 2);
-      evy[e_num] = random(-2, 2);
-      e_num++;
+      // 1/5の確率で弾を増やす
+      float tx, ty;
+      if(random(0, 1)<0.2){
+        do{
+          tx = random(0, width);
+          ty = random(0, height);
+        }while(dist(tx, ty, px, py) < 30 || dist(tx, ty, width/2, height/2)<width/2);
+        bs[e_num] = new Bullet();
+        bs[e_num].init((int)random(0, 2), tx, ty, px, py);
+        e_num++;
+      }
       
       // 場外に出た弾を消す
       for(int i=e_num-1; i>=0; i--){
-        if(ex[i]<0 || ex[i]>width || ey[i]<0 || ey[i]>height){
-          ex[i] = ex[e_num-1];
-          ey[i] = ey[e_num-1];
-          evx[i] = evx[e_num-1];
-          evy[i] = evy[e_num-1];
+        if(bs[i].hp<=0){
+          bs[i] = bs[e_num-1];
           e_num--;
         }
       }
