@@ -14,7 +14,10 @@ class KeyState{
       reset = 1;
     }else if(k=='z'){
       z = 1;
-    }
+    }else if(k=='w') u=1;
+    else if(k=='a') l=1;
+    else if(k=='s') d=1;
+    else if(k=='d') r=1;
     if(k==CODED){
       if(kc==UP) u = 1;
       if(kc==DOWN) d = 1;
@@ -28,7 +31,10 @@ class KeyState{
       reset = 0;
     }else if(k=='z'){
       z = 0;
-    }
+    }else if(k=='w') u=0;
+    else if(k=='a') l=0;
+    else if(k=='s') d=0;
+    else if(k=='d') r=0;
     if(k==CODED){
       if(kc==UP) u = 0;
       if(kc==DOWN) d = 0;

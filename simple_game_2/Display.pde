@@ -14,8 +14,13 @@ class Display{
       for(int i=0; i<state.e_num; i++){
         stroke(0);
         if(state.bs[i].type==0) fill(255, 0, 0, 100);
-        if(state.bs[i].type==1) fill(0, 255, 0, 100);
+        if(state.bs[i].type==1) fill(255, 255, 0, 100);
         ellipse(state.bs[i].x, state.bs[i].y, state.bs[i].r*2, state.bs[i].r*2);
+      }
+      for(int i=0; i<state.p_b_num; i++){
+        stroke(0);
+        fill(0, 255, 255, 100);
+        ellipse(state.pbs[i].x, state.pbs[i].y, state.pbs[i].r*2, state.pbs[i].r*2);
       }
       
       // 自機
