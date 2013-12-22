@@ -59,11 +59,22 @@ class State{
       
       // プレイヤーとの当たり判定
       for(int i=0; i<e_num; i++){
-        if(dist(px, py, bs[i].x, bs[i].y) < 2+bs[i].r){
+        if(bs[i].hp>0 && dist(px, py, bs[i].x, bs[i].y) < 3+bs[i].r){
           php--;
+          bs[i].hp = 0;
         }
       }
       if(php<=0) meta_state = 2;
+      
+      // プレイヤーの弾と敵の弾の当たり判定
+      for(int i=0; i<e_num; i++){
+        for(int j=0; j<p_b_num; j++){
+          if(pbs[j].hp>0 && dist(bs[i].x, bs[i].y, pbs[j].x, pbs[j].y) < bs[i].r+pbs[j].r){
+            bs[i].hp = max(0, bs[i].hp-2);
+            pbs[j].hp = 0;
+          }
+        }
+      }
       
       // プレイヤーの移動
       if(ks.u==1) py-=3;
@@ -72,7 +83,7 @@ class State{
       if(ks.r==1) px+=3;
       
       // プレイヤーの攻撃
-      if(mousePressed && (int)time%10==0 && p_b_num<p_b_num_max){
+      if(mousePressed && (int)time%6==0 && p_b_num<p_b_num_max){
         pbs[p_b_num] = new Bullet();
         pbs[p_b_num].init(1, px, py, mouseX, mouseY);
         p_b_num++;
