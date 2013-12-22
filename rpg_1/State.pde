@@ -6,6 +6,7 @@
 class State{
   State_battle s_battle;
   State_field s_field;
+  State_menu s_menu;
   
   // この変数が0ならフィールド、1なら戦闘中
   int meta_state;
@@ -14,6 +15,7 @@ class State{
     meta_state = 0;
     s_battle = new State_battle();
     s_field = new State_field();
+    s_menu = new State_menu();
   }
   
   void init(Game game){
@@ -33,6 +35,7 @@ class State_player{
   int att;
   int def;
   int spd;
+  int exp;
   
 }
 
