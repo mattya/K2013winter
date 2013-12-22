@@ -11,6 +11,7 @@ void setup(){
 
 void draw(){
   game.update();
+  game.event.timePassed();
 }
 
 void keyPressed(){

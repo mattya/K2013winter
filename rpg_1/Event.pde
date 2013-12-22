@@ -19,6 +19,17 @@ class Event{
     mouse_left = 0;
   }
   
+  void timePassed(){
+    if(key_up>=1) key_up++;
+    if(key_down>=1) key_down++;
+    if(key_right>=1) key_right++;
+    if(key_left>=1) key_left++;
+    if(key_z>=1) key_z++;
+    if(key_x>=1) key_x++;
+    if(key_c>=1) key_c++;
+    if(mouse_left>=1) mouse_left++;
+  }
+  
   void keyPressed(int key, int keyCode){
     if(key==CODED){
       if(keyCode==UP) key_up = 1;
