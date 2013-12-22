@@ -10,6 +10,8 @@ class Bullet{
   void init(int t0, float x0, float y0, float px, float py){
     // type0: normal
     // type1: jiki nerai
+    // type20: normal enemy
+    // type21: missile enemy
     type = t0;
     x = x0;
     y = y0;
@@ -30,6 +32,23 @@ class Bullet{
       float th = atan2(py-y0, px-x0);
       vx = v*cos(th);
       vy = v*sin(th);
+    }else if(type==20){
+      r = 10;
+      att = 10;
+      hp = 10;
+      float v = 0.1;
+      float th = atan2(py-y0, px-x0) + random(-0.5, 0.5);
+      vx = v*cos(th);
+      vy = v*sin(th);
+    }else if(type==21){
+      r = 6;
+      att = 10;
+      hp = 5;
+      float v = 0.3;
+      float th = atan2(py-y0, px-x0);
+      if(random(0, 1)<0.5) th = -th;
+      vx = v*sin(th);
+      vy = v*cos(th);
     }
     /* 
     data = d;
@@ -46,12 +65,28 @@ class Bullet{
     */
   }
   
-  void move(){
+  int move(Bullet[] bs, int num, int num_max, float px, float py){
     x += vx;
     y += vy;
     time += 1.0;
     
+    if(type==20 && num<num_max){
+      if((int)time%40==0){
+        bs[num] = new Bullet();
+        bs[num].init(0, x, y, px, py);
+        num++;
+      }
+    }
+    if(type==21 && num<num_max){
+      if((int)time%20==0){
+        bs[num] = new Bullet();
+        bs[num].init(1, x, y, px, py);
+        num++;
+      }
+    }
+    
     if(x<0 || x>width || y<0 || y>height) hp = 0;
+    return num;
   }
   
 }
