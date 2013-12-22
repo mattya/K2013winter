@@ -9,9 +9,14 @@ class Display_field{
   
   void update(Game game){
     background(255);
+    
+    image(game.state.s_field.field.img, 
+      -game.state.s_field.px + width/2, 
+      -game.state.s_field.py + height/2);
+    
     stroke(0);
     strokeWeight(1);
-    ellipse(game.state.s_field.px, game.state.s_field.py, 10, 10);
+    ellipse(width/2, height/2, 10, 10);
     
   }
 }

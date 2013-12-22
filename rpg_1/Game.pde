@@ -17,6 +17,9 @@ class Game{
     // ファイルに書かれたデータを読み込む
     data.load_all();
     
+    // 状態の初期化
+    state.init(this);
+    
   }
   
   void update(){
