@@ -22,5 +22,16 @@ class Display_field{
     
     fill(255, 0, 0);
     rect(game.state.s_field.npc_x - game.state.s_field.px + width/2, game.state.s_field.npc_y - game.state.s_field.py + height/2, 10, 10);
+    
+    if(game.state.s_field.kaiwa==1){
+      stroke(0);
+      fill(200, 230);
+      rect(10, height-100, width-20, 100-10);
+      fill(255);
+      rect(20, height-90, 70, 70);
+      fill(0);
+      textAlign(LEFT);
+      text("NPCと戦闘開始▽", 30+70, height-70);
+    }
   }
 }

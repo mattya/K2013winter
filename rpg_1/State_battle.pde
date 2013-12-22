@@ -72,6 +72,8 @@ class State_battle{
   void end_battle(int f){
     if(f==0) state = 1;
     else if(f==1) state = 2;
+    
+    
   }
 }
 
