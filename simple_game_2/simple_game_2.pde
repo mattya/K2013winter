@@ -17,6 +17,7 @@ void setup(){
 void draw(){
   state.update(ks);
   display.draw(state);
+  ks.timePassed();
 }
 
 void keyPressed(){

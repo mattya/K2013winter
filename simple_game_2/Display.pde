@@ -18,7 +18,17 @@ class Display{
       background(255);
       fill(0);
       textAlign(CENTER);
-      text("press z key to start", width/2, height/2);
+//      text("press z key to start", width/2, height/2);
+      text("ゲーム開始", width/2, 80);
+      for(int i=0; i<5; i++){
+        text(state.player.upgrade_text[i] + " 現在: " + state.player.level[i] + " 価格: " + state.player.upgrade_cost_base[i]*(state.player.level[i]+1), width/2, 100+i*20);
+      }
+      text("gold: " + state.player.score, width/2, 300);
+      stroke(0);
+      noFill();
+      rect(50, 85+state.command*20, width-100, 20);
+        
+        
     }else if(state.meta_state==1){
       background(255);
       imageMode(CENTER);

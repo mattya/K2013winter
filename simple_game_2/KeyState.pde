@@ -1,7 +1,9 @@
 class KeyState{
   int u, d, l, r;
   int reset, z;
+  int kp;
   KeyState(){
+    kp=0;
     u=0;
     d=0;
     l=0;
@@ -9,7 +11,11 @@ class KeyState{
     reset = 0;
     z = 0;
   }
+  void timePassed(){
+    kp=0;
+  }
   void keyPressed(int k, int kc){
+    kp=1;
     if(k=='r'){
       reset = 1;
     }else if(k=='z'){
@@ -27,6 +33,7 @@ class KeyState{
   }
   
   void keyReleased(int k, int kc){
+    kp=-1;
     if(k=='r'){
       reset = 0;
     }else if(k=='z'){

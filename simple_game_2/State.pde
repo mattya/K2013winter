@@ -4,8 +4,11 @@ class State{
   // 1: game
   // 2: gameover
   int meta_state;
+  int command;
   
+  Player player;
   float px, py;
+  float pv;
   float php;
   
   int e_num;
@@ -21,18 +24,20 @@ class State{
   State(){
     bs = new Bullet[e_num_max];
     pbs = new Bullet[p_b_num_max];
+    player = new Player();
     
-    init();
+    init_game();
   }
   
-  void init(){
+  void init_game(){
     meta_state = 0;
+    command = -1;
     
     px = width/2;
     py = height/2;
     // プレイヤー初期HP
-    php = 100;
-    
+    php = 10 + 10 * player.level[3];
+    pv = 1 + 1 * player.level[4];
     e_num = 0;
     p_b_num = 0;
     
@@ -41,9 +46,22 @@ class State{
   
   void update(KeyState ks){
     if(meta_state==0){
-      if(ks.z==1){
-        init();
-        meta_state=1;
+      if(ks.kp==1 && ks.z==1){
+        if(command==-1){
+          init_game();
+          meta_state=1;
+        }else{
+          if(player.score > player.upgrade_cost_base[command]*(player.level[command]+1)){
+            player.score -= player.upgrade_cost_base[command]*(player.level[command]+1);
+            player.level[command]++;
+          }
+        }
+      }else if(ks.kp==1 && ks.u==1){
+        if(command>=0)
+          command--;
+      }else if(ks.kp==1 && ks.d==1){
+        if(command<4)
+          command++;
       }
     }
     else if(meta_state==1){
@@ -64,7 +82,10 @@ class State{
           bs[i].hp = 0;
         }
       }
-      if(php<=0) meta_state = 2;
+      if(php<=0){
+        player.score += time;
+        meta_state = 2;
+      }
       
       // プレイヤーの弾と敵の弾の当たり判定
       for(int i=0; i<e_num; i++){
@@ -77,16 +98,18 @@ class State{
       }
       
       // プレイヤーの移動
-      if(ks.u==1) py-=3;
-      if(ks.d==1) py+=3;
-      if(ks.l==1) px-=3;
-      if(ks.r==1) px+=3;
+      if(ks.u==1) py-=pv;
+      if(ks.d==1) py+=pv;
+      if(ks.l==1) px-=pv;
+      if(ks.r==1) px+=pv;
       
       // プレイヤーの攻撃
-      if(mousePressed && (int)time%6==0 && p_b_num<p_b_num_max){
-        pbs[p_b_num] = new Bullet();
-        pbs[p_b_num].init(1, px, py, mouseX, mouseY);
-        p_b_num++;
+      for(int i=0; i<player.level[0]; i++){
+        if(mousePressed && (int)time%(int)(1.0+15*5.0/(5.0+player.level[1]))==0 && p_b_num<p_b_num_max){
+          pbs[p_b_num] = new Bullet();
+          pbs[p_b_num].init(1, px, py, mouseX+random(-8, 8), mouseY+random(-8, 8));
+          p_b_num++;
+        }
       }
       
       // 1/50の確率で敵を発生
@@ -119,6 +142,7 @@ class State{
     else if(meta_state==2){
       if(ks.reset==1){
         meta_state = 0;
+        command = -1;
       }
     }
   }
